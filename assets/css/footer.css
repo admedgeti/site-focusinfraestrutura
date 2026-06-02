@@ -1,0 +1,176 @@
+/* --- Estilização do Footer Premium --- */
+.footer {
+    background-color: #2a0f0f; /* Fundo grafite escuro corporativo */
+    color: #94a3b8; /* Texto cinza claro para leitura confortável */
+    padding: 70px 0 0 0;
+    font-size: 15px;
+    border-top: 4px solid #800020; /* Detalhe superior em Vermelho Escuro / Bordô */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Colunas alinhadas simetricamente */
+    gap: 40px;
+}
+
+/* Colunas individuais */
+.footer-column h3 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* Detalhe estético: Tracinho vermelho embaixo dos títulos do rodapé */
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background-color: #800020; /* Vermelho Escuro */
+}
+
+/* Especificidades da primeira coluna (Branding) */
+.branding-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.footer-logo span {
+    color: #800020; /* Destaca o "Infraestrutura" com o Vermelho Escuro */
+}
+
+.footer-about {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Redes Sociais no Rodapé */
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-socials a {
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+    background-color: #800020; /* Acende em Vermelho Escuro no hover */
+    transform: translateY(-3px);
+}
+
+/* Listas de links e contatos */
+.footer-links, .footer-contact-info {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    padding-left: 5px; /* Sutil empurrão estético no link */
+}
+
+.footer-contact-info li {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.footer-contact-info strong {
+    display: block;
+    color: #ffffff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.footer-contact-info a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-contact-info a:hover {
+    color: #ffffff;
+}
+
+.footer-address {
+    line-height: 1.6;
+}
+
+/* --- Barra Inferior de Direitos Autorais --- */
+.footer-bottom {
+    background-color: #160909; /* Tom ligeiramente mais escuro que o footer principal */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px 0;
+    font-size: 14px;
+}
+
+.footer-bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.developer-credit span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* --- Ajuste de Responsividade (Telas menores) --- */
+@media (max-width: 968px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr); /* Divide em duas colunas no tablet */
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* 1 coluna vertical empilhada inteira no celular */
+        gap: 35px;
+    }
+    
+    .footer-bottom-container {
+        flex-direction: column; /* Alinha direitos autorais e créditos verticalmente no mobile */
+        gap: 10px;
+        text-align: center;
+    }
+}

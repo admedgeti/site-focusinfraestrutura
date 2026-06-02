@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Infraestrutura</title>
+    <style>
+        /* --- Configurações Globais --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        /* --- Seção Hero / Destaque --- */
+.hero-section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    min-height: calc(100vh - 100px); /* Ocupa quase a tela toda */
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+/* Estilização dos Textos */
+.hero-text {
+    flex: 1;
+    text-align: left;
+}
+
+.hero-text .subtitle {
+    display: inline-block;
+    color: #751010;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-text h1 .highlight {
+    color: #791010;
+    position: relative;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Botão Moderno */
+.btn-hero {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: #006108;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(235, 37, 37, 0.3);
+}
+
+.btn-hero:hover {
+    background-color: #00c92b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 173, 173, 0.4);
+}
+
+/* Container da Imagem (Direita) */
+.hero-image-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 550px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalhe Moderno: Card flutuando sobre a imagem */
+.image-overlay-card {
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+    background-color: #0f172a;
+    color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.image-overlay-card strong {
+    font-size: 24px;
+    color: #48f838;
+}
+
+.image-overlay-card span {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Ajustes de Responsividade para o Hero --- */
+@media (max-width: 968px) {
+    .hero-container {
+        flex-direction: column-reverse; /* Imagem fica no topo no mobile */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 36px;
+    }
+
+    .hero-image {
+        height: 350px;
+    }
+    
+    .image-overlay-card {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -15px;
+        width: 80%;
+    }
+}
+       /* --- Seção de Funcionalidades (Abas + Carrossel) --- */
+.features-section {
+    padding: 80px 20px;
+    background-color: #f8fafc;
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* --- Estilização do Lado Esquerdo (Abas) --- */
+.features-text-content {
+    flex: 1;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #e0a8a8;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #ff2929;
+}
+
+/* Linha azul indicativa abaixo do botão ativo */
+.tab-btn.active {
+    color: #eb2525;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #eb2525;
+    border-radius: 2px;
+}
+
+/* Conteúdo das Abas */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h2 {
+    font-size: 28px;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+.tab-content p {
+    font-size: 16px;
+    color: #141618;
+    line-height: 1.7;
+}
+
+/* --- Estilização do Lado Direito (Carrossel) --- */
+.features-carousel {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    height: 380px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.carousel-slider {
+    display: flex;
+    width: 300%; /* 100% para cada uma das 3 imagens */
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    width: 33.333%;
+    height: 100%;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Botões de Navegação (Setas) */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #0f172a;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-nav:hover {
+    background-color: #ffd5d5;
+    color: #ffffff;
+}
+
+.carousel-nav.prev { left: 15px; }
+.carousel-nav.next { right: 15px; }
+
+/* Pontinhos (Dots) */
+.carousel-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 222, 222, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #ff0606;
+    width: 22px; /* Efeito moderno de pílula no ativo */
+    border-radius: 5px;
+}
+
+/* Animação de transição do texto */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 968px) {
+    .features-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .tab-buttons {
+        justify-content: center;
+    }
+    
+    .features-carousel {
+        max-width: 100%;
+        height: 300px;
+    }
+} 
+/* --- Seção do Carrossel de Palavras Infinito --- */
+.ticker-section {
+    position: relative;
+    padding: 175px 0;
+    /* Imagem de fundo de uma obra */
+    background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1400&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efeito Parallax moderno ao rolar a página */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* Camada escura levemente transparente (65% de opacidade) */
+.ticker-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.65); /* Tom azul escuro/grafite */
+    z-index: 1;
+}
+
+/* Container principal do Carrossel */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2; /* Garante que o texto fique acima do overlay */
+}
+
+/* Bloco que realiza o movimento de deslizar */
+.ticker-motion {
+    display: flex;
+    width: max-content;
+    animation: tickerAnimation 25s linear infinite; /* 25 segundos para dar uma velocidade confortável */
+}
+
+/* Estilização de cada palavra/frase */
+.ticker-item {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 40px; /* Espaçamento entre as palavras */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Pequeno detalhe divisor entre as palavras (um pontinho azul da marca) */
+.ticker-item::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #eb2525;
+    border-radius: 50%;
+}
+
+/* Configuração da Animação Infinita */
+@keyframes tickerAnimation {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* Move exatamente metade do bloco (o primeiro grupo), fazendo o loop perfeito */
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+/* Pausa o movimento quando o usuário passa o mouse por cima (toque de usabilidade) */
+.ticker-wrap:hover .ticker-motion {
+    animation-play-state: paused;
+}
+
+/* --- Ajuste para Celulares --- */
+@media (max-width: 768px) {
+    .ticker-section {
+        padding: 45px 0;
+        background-attachment: scroll; /* Desativa o parallax no mobile para melhor performance */
+    }
+    .ticker-item {
+        font-size: 18px; /* Texto ligeiramente menor em telas pequenas */
+        padding: 0 25px;
+    }
+}
+/* --- Seção Áreas de Atuação --- */
+.areas-section {
+    padding: 90px 20px;
+    background-color: #ffffff;
+}
+
+.areas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Alinhamento do Texto de Descrição */
+.areas-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+}
+
+.areas-header .areas-subtitle {
+    display: inline-block;
+    color: #520808;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.areas-header h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+.areas-header p {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Grade Simétrica com CSS Grid */
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas idênticas no desktop */
+    gap: 30px; /* Espaçamento idêntico e simétrico horizontal e vertical */
+}
+
+/* Estilização de cada Card/Link */
+.area-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 35px 30px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 200px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pequeno número discreto no topo do card */
+.area-icon {
+    font-size: 14px;
+    font-weight: 700;
+    color: #94a3b8;
+    background-color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+    transition: all 0.35s ease;
+}
+
+.area-card h3 {
+    font-size: 20px;
+    color: #0f172a;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+/* Texto indicativo de link interno */
+.area-link-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #520707;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
+}
+
+/* --- Efeitos de Interatividade (Hover) --- */
+.area-card:hover {
+    background-color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+}
+
+.area-card:hover .area-icon {
+    background-color: #ff5858;
+    color: #ffffff;
+    border-color: #eb2525;
+}
+
+.area-card:hover .area-link-text {
+    transform: translateX(5px); /* Move a setinha levemente para a direita */
+    opacity: 1;
+}
+
+/* --- Responsividade da Grade --- */
+@media (max-width: 968px) {
+    .areas-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+        gap: 20px;
+    }
+    .areas-section {
+        padding: 60px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .areas-grid {
+        grid-template-columns: 1fr; /* 1 coluna cheia no celular */
+    }
+    .areas-header h2 {
+        font-size: 28px;
+    }
+}
+/* --- Seção de Serviços com Ícones --- */
+.services-spec-section {
+    padding: 70px 20px;
+    background-color: #f8fafc; /* Contraste sutil cinza claro */
+    border-top: 1px solid #e2e8f0;
+}
+
+.services-spec-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Configuração da Grade de 4 Colunas */
+.services-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Quatro blocos lado a lado no desktop */
+    gap: 25px;
+}
+
+/* Estilo do Card Individual */
+.spec-card {
+    background-color: #ffffff;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+/* Círculo do Ícone */
+.spec-icon-wrapper {
+    width: 55px;
+    height: 55px;
+    background-color: rgba(235, 37, 37, 0.1); /* Fundo azul bem clarinho */
+    color: #eb2525; /* Ícone Azul */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Ajuste dos ícones SVG */
+.spec-icon-wrapper svg {
+    width: 26px;
+    height: 26px;
+}
+
+.spec-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.spec-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* --- Efeito Hover Moderno --- */
+.spec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -3px rgba(15, 23, 42, 0.08);
+}
+
+.spec-card:hover .spec-icon-wrapper {
+    background-color: #3f0000;
+    color: #ffffff; /* Inverte as cores do ícone ao passar o mouse */
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1024px) {
+    .services-spec-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias/tablets */
+        gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .services-spec-grid {
+        grid-template-columns: 1fr; /* 1 coluna total no celular */
+    }
+    .services-spec-section {
+        padding: 50px 20px;
+    }
+}
+/* --- Seção do Carrossel de Serviços/Fotos --- */
+.portfolio-carousel-section {
+    padding: 90px 20px;
+    background-color: #ffffff;
+    overflow: hidden; /* Evita que os cards que saem da tela criem barra de rolagem no site */
+}
+
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Cabeçalho */
+.portfolio-header {
+    text-align: left;
+    max-width: 650px;
+    margin-bottom: 45px;
+}
+
+.portfolio-header .portfolio-subtitle {
+    display: inline-block;
+    color: #800020; /* Vermelho Escuro / Bordô */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.portfolio-header h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+.portfolio-header p {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Janela de Máscara do Carrossel */
+.carousel-view-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Trilho que segura os cards lado a lado */
+.portfolio-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+/* O Card Individual */
+.portfolio-card {
+    flex: 0 0 calc(33.333% - 20px); /* 3 itens por vez na tela no desktop */
+    min-width: 300px;
+    background-color: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Caixa de Imagem com Zoom Interno */
+.portfolio-img-box {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Etiqueta / Tag sobre a imagem */
+.portfolio-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #800020; /* Vermelho Escuro */
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Textos do Card */
+.portfolio-info {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-info h3 {
+    font-size: 18px;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.portfolio-info p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Botões de Navegação (Setas) */
+.portfolio-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    color: #0f172a;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.portfolio-nav-btn:hover {
+    background-color: #800020; /* Vermelho Escuro no hover */
+    color: #ffffff;
+    border-color: #800020;
+    box-shadow: 0 6px 16px rgba(128, 0, 32, 0.3);
+}
+
+.portfolio-nav-btn.prev-btn {
+    left: -25px;
+}
+
+.portfolio-nav-btn.next-btn {
+    right: -25px;
+}
+
+/* Efeito de destaque no Card Inteiro ao passar o mouse */
+.portfolio-card:hover .portfolio-img-box img {
+    transform: scale(1.08);
+}
+
+/* --- Ajustes Responsivos (Mobile e Tablet) --- */
+@media (max-width: 1024px) {
+    .portfolio-card {
+        flex: 0 0 calc(50% - 15px); /* 2 itens na tela em tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Desativa as setas no mobile, o usuário vai arrastar com o dedo */
+    .portfolio-nav-btn {
+        display: none;
+    }
+    
+    .portfolio-carousel-section {
+        padding: 50px 20px;
+    }
+
+    .carousel-view-wrapper {
+        overflow-x: auto; /* Permite o deslize de toque nativo */
+        scroll-snap-type: x mandatory;
+        padding-bottom: 15px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Esconde a barra de rolagem padrão para ficar estético */
+    .carousel-view-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .portfolio-track {
+        gap: 20px;
+    }
+
+    .portfolio-card {
+        flex: 0 0 85vw; /* O card ocupa 85% da largura da tela do celular */
+        scroll-snap-align: start;
+    }
+}
+/* Garante que nada vaze e que os itens fiquem alinhados */
+.portfolio-carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.portfolio-track {
+    display: flex;
+    gap: 30px;
+    width: max-content; /* Permite expansão infinita horizontal com os clones */
+    will-change: transform;
+}
+
+/* Modificação no Card para manter tamanho rígido e proporcional */
+.portfolio-card {
+    flex: 0 0 380px; /* Largura fixa ideal para evitar distorções no loop */
+    background-color: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* No mobile, voltamos para o scroll nativo de toque sem clones */
+@media (max-width: 768px) {
+    .portfolio-carousel-viewport {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .portfolio-track {
+        width: auto;
+    }
+    .portfolio-card {
+        flex: 0 0 85vw;
+    }
+}
+/* --- Seção de Contato / CTA --- */
+.contact-cta-section {
+    position: relative;
+    padding: 100px 20px;
+    /* Imagem de obra desvanecida de fundo */
+    background-image: url('https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&w=1400&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efeito parallax moderno */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Camada desvanecida (Overlay Escuro) */
+.cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Mistura de preto com um tom bem fechado de vermelho escuro/grafite */
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(40, 0, 10, 0.9));
+    z-index: 1;
+}
+
+.cta-container {
+    position: relative;
+    z-index: 2; /* Fica acima do overlay */
+    max-width: 800px;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Título e Animação */
+.cta-title {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    opacity: 0;
+    /* Animação para revelar o título de baixo para cima ao carregar */
+    animation: fadeInUpReveal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Animação de Brilho/Pulsação de Cor na expressão "Grande Valor" */
+.animated-gradient-text {
+    color: #ff4d6d; /* Vermelho mais aberto para contraste no fundo escuro */
+    background: linear-gradient(90deg, #ff4d6d, #800020, #ff4d6d);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineTextEffect 4s linear infinite;
+    display: inline-block;
+}
+
+/* Descrição */
+.cta-description {
+    font-size: 20px;
+    color: #e2e8f0;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    opacity: 0;
+    animation: fadeInUpReveal 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards; /* Atraso de 0.3s */
+}
+
+/* Caixa do Botão */
+.cta-action-box {
+    opacity: 0;
+    animation: fadeInUpReveal 1s cubic-bezier(0.25, 1, 0.5, 1) 0.6s forwards; /* Atraso de 0.6s */
+}
+
+/* Botão Sólido Vermelho Escuro Corporativo */
+.btn-cta {
+    display: inline-block;
+    padding: 18px 45px;
+    background-color: #800020; /* Nosso Vermelho Escuro / Bordô */
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #800020;
+    box-shadow: 0 10px 25px rgba(128, 0, 32, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-cta:hover {
+    background-color: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
+}
+
+/* --- KEYFRAMES (Animações CSS) --- */
+
+/* 1. Animação de revelação suave subindo */
+@keyframes fadeInUpReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. Animação do brilho passando pelo texto */
+@keyframes shineTextEffect {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* --- Responsividade da Seção --- */
+@media (max-width: 768px) {
+    .contact-cta-section {
+        padding: 70px 20px;
+        background-attachment: scroll; /* Desliga o parallax em celulares para melhor desempenho */
+    }
+
+    .cta-title {
+        font-size: 36px;
+    }
+
+    .cta-description {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .btn-cta {
+        padding: 15px 35px;
+        font-size: 16px;
+        width: 100%; /* Botão ocupa a largura total no mobile para facilitar o clique com o polegar */
+    }
+}
+    </style>
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+</head>
+<body>
+
+    <header class="header">
+    <nav class="nav-container">
+        <div class="logo">Focus <span>Infraestrutura</span></div>
+        
+        <input type="checkbox" id="menu-toggle">
+        
+        <label for="menu-toggle" class="hamburger-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <ul class="menu">
+            <li class="menu-item"><a href="#home">Home</a></li>
+            <li class="menu-item"><a href="#quem-somos">Quem Somos</a></li>
+            <li class="menu-item"><a href="#servicos">Serviços</a></li>
+            <li class="menu-item"><a href="#noticias">Notícias</a></li>
+            <li class="menu-item"><a href="#contato">Contato</a></li>
+            <li class="menu-item mobile-socials-item">
+                <div class="mobile-socials">
+                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="LinkedIn">LK</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="header-socials">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+        </div>
+    </nav>
+</header>
+    <main class="main-content">
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-text">
+                <span class="subtitle">Engenharia e Inovação</span>
+                <h1>Projetando os seus <span class="highlight">sonhos</span></h1>
+                <p>Na Focus Infraestrutura, transformamos grandes ideias em realidade. Combinamos tecnologia de ponta, planejamento estratégico e execução impecável para construir o futuro da sua empresa.</p>
+                <a href="#contato" class="btn-hero">Fale Conosco</a>
+            </div>
+            
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" alt="Obra de Infraestrutura e Planejamento" class="hero-image">
+                <div class="image-overlay-card">
+                    <strong>+150</strong>
+                    <span>Projetos Entregues</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+    <section class="features-section">
+    <div class="features-container">
+        
+        <!-- Lado Esquerdo: Abas de Texto Interativas -->
+        <div class="features-text-content">
+            <!-- Botões das Abas -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(event, 'solucoes')">Soluções Eficientes</button>
+                <button class="tab-btn" onclick="switchTab(event, 'transparencia')">Transparência</button>
+            </div>
+
+            <!-- Conteúdos das Abas -->
+            <div class="tab-wrapper">
+                <!-- Conteúdo 1: Soluções Eficientes -->
+                <div id="solucoes" class="tab-content active">
+                    <h2>Compromisso com a Excelência</h2>
+                    <p>Com anos de experiência no mercado, temos orgulho em oferecer um serviço de qualidade desde o planejamento até a entrega final do seu projeto. Nossa equipe de profissionais altamente qualificados trabalha com eficiência e comprometimento para garantir que cada projeto seja único e atenda às necessidades individuais de nossos clientes. Nosso objetivo é superar as expectativas e entregar resultados excepcionais.</p>
+                </div>
+
+                <!-- Conteúdo 2: Transparência -->
+                <div id="transparencia" class="tab-content">
+                    <h2>Parceria Baseada em Confiança</h2>
+                    <p>Em nossa empresa, valorizamos muito a transparência e a comunicação aberta com nossos clientes. É por isso que nos esforçamos para manter você informado sobre cada etapa do processo de construção e garantir que suas necessidades sejam atendidas. Nosso objetivo é superar suas expectativas e garantir que você fique satisfeito com o resultado final.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lado Direito: Carrossel de Imagens Dinâmico -->
+        <div class="features-carousel">
+            <div class="carousel-slider" id="carouselSlider">
+                <!-- Imagem 1 -->
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Planejamento de Infraestrutura">
+                </div>
+                <!-- Imagem 2 -->
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80" alt="Tecnologia e Engenharia">
+                </div>
+                <!-- Imagem 3 -->
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Edificação Moderna">
+                </div>
+            </div>
+
+            <!-- Controles do Carrossel (Setas) -->
+            <button class="carousel-nav prev" onclick="moveCarousel(-1)">&#10094;</button>
+            <button class="carousel-nav next" onclick="moveCarousel(1)">&#10095;</button>
+
+            <!-- Indicadores (Pontinhos) -->
+            <div class="carousel-dots">
+                <span class="dot active" onclick="setCarouselSlide(0)"></span>
+                <span class="dot" onclick="setCarouselSlide(1)"></span>
+                <span class="dot" onclick="setCarouselSlide(2)"></span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="ticker-section">
+    <div class="ticker-overlay"></div>
+    
+    <div class="ticker-wrap">
+        <div class="ticker-motion">
+            <div class="ticker-item">Qualidade Assegurada</div>
+            <div class="ticker-item">Capacitação Profissional</div>
+            <div class="ticker-item">Excelência Operacional</div>
+            <div class="ticker-item">Inovação em Construção</div>
+            
+            <div class="ticker-item">Qualidade Assegurada</div>
+            <div class="ticker-item">Capacitação Profissional</div>
+            <div class="ticker-item">Excelência Operacional</div>
+            <div class="ticker-item">Inovação em Construção</div>
+        </div>
+    </div>
+</section>
+<section class="areas-section" id="servicos">
+    <div class="areas-container">
+        
+        <div class="areas-header">
+            <span class="areas-subtitle">O que fazemos</span>
+            <h2>Áreas de Atuação</h2>
+            <p>A Focus Infraestrutura atua em todo território nacional, realizando projetos nos mais diversos segmentos da indústria da construção.</p>
+        </div>
+
+        <div class="areas-grid">
+            
+            <a href="#construcao-inovadora" class="area-card">
+                <div class="area-icon">01</div>
+                <h3>Construção Inovadora</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#automacao-construtiva" class="area-card">
+                <div class="area-icon">02</div>
+                <h3>Automação Construtiva</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#pesquisa-aplicada" class="area-card">
+                <div class="area-icon">03</div>
+                <h3>Pesquisa Aplicada</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#parcerias-estruturais" class="area-card">
+                <div class="area-icon">04</div>
+                <h3>Parcerias Estruturais</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#gestao-patrimonial" class="area-card">
+                <div class="area-icon">05</div>
+                <h3>Gestão Patrimonial</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#lideranca-de-projetos" class="area-card">
+                <div class="area-icon">06</div>
+                <h3>Liderança de Projetos</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#ecoeficiencia" class="area-card">
+                <div class="area-icon">07</div>
+                <h3>Ecoeficiência</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#suprimento-qualificado" class="area-card">
+                <div class="area-icon">08</div>
+                <h3>Suprimento Qualificado</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+            <a href="#visao-global" class="area-card">
+                <div class="area-icon">09</div>
+                <h3>Visão Global</h3>
+                <span class="area-link-text">Ver detalhes &rarr;</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+<section class="services-spec-section">
+    <div class="services-spec-container">
+        
+        <div class="services-spec-grid">
+            
+            <div class="spec-card">
+                <div class="spec-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 22H2M2 18h11M13 14l-4 4M13 14l3 4M13 14h6a2 2 0 0 1 2 2v2v4"/>
+                        <circle cx="6" cy="14" r="2"/>
+                    </svg>
+                </div>
+                <h3>1. Terraplanagem</h3>
+                <p>Preparação precisa de terrenos, nivelamento e movimentação de terra com maquinário de alta tecnologia.</p>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="4" rx="1"/>
+                        <rect x="2" y="11" width="20" height="4" rx="1"/>
+                        <rect x="2" y="18" width="20" height="4" rx="1"/>
+                    </svg>
+                </div>
+                <h3>2. Pavimentação</h3>
+                <p>Execução de vias, asfalto e pisos industriais de alta resistência para tráfego pesado e urbano.</p>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                        <line x1="15" y1="3" x2="15" y2="21"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="3" y1="15" x2="21" y2="15"/>
+                    </svg>
+                </div>
+                <h3>3. Construção Civil</h3>
+                <p>Edificações residenciais, comerciais e industriais erguidas com o máximo rigor técnico e prazos estritos.</p>
+            </div>
+
+            <div class="spec-card">
+                <div class="spec-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h3>4. Demais Obras</h3>
+                <p>Projetos especiais sob demanda, reformas estruturais e manutenções complexas de infraestrutura.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="portfolio-carousel-section" id="noticias">
+    <div class="portfolio-container">
+        
+        <div class="portfolio-header">
+            <span class="portfolio-subtitle">Portfólio em Foco</span>
+            <h2>Nossos Serviços em Execução</h2>
+            <p>Conheça a qualidade técnica e a magnitude das obras e projetos de infraestrutura assinados pela Focus em todo o país.</p>
+        </div>
+
+        <div class="carousel-view-wrapper">
+    
+    <div class="portfolio-carousel-viewport">
+        <div class="portfolio-track" id="portfolioTrack">
+            
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" alt="Obra de Terraplanagem Industrial">
+                    <div class="portfolio-tag">Terraplanagem</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Nivelamento de Polo Industrial</h3>
+                    <p>Preparação de base de 50.000m² com precisão milimétrica de escoamento.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=600&q=80" alt="Pavimentação de Rodovia">
+                    <div class="portfolio-tag">Pavimentação</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Pavimentação de Via Expressa</h3>
+                    <p>Aplicação de asfalto usinado de alta durabilidade para tráfego intenso.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=600&q=80" alt="Construção de Estrutura Comercial">
+                    <div class="portfolio-tag">Construção Civil</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Complexo Corporativo Focus</h3>
+                    <p>Edificação de alta engenharia estrutural com soluções ecoeficientes.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=600&q=80" alt="Infraestrutura Logística">
+                    <div class="portfolio-tag">Demais Obras</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Terminal de Cargas Automatizado</h3>
+                    <p>Integração de infraestrutura civil com sistemas mecânicos avançados.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Saneamento e Drenagem">
+                    <div class="portfolio-tag">Infraestrutura</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Rede de Drenagem Profunda</h3>
+                    <p>Implantação de galerias subterrâneas para escoamento urbano.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=600&q=80" alt="Fundações Pesadas">
+                    <div class="portfolio-tag">Construção Civil</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Fundações de Alta Complexidade</h3>
+                    <p>Perfuração profunda e estacas estruturais para arranha-céus estáveis.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-box">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80" alt="Pátio Logístico">
+                    <div class="portfolio-tag">Pavimentação</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Pátio de Estocagem Pesada</h3>
+                    <p>Pavimento rígido de concreto dimensionado para grandes empilhadeiras.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="portfolio-nav-btn prev-btn" id="prevCardBtn" aria-label="Voltar">&#10094;</button>
+    <button class="portfolio-nav-btn next-btn" id="nextCardBtn" aria-label="Avançar">&#10095;</button>
+</div>
+
+    </div>
+</section>
+<section class="contact-cta-section" id="contato">
+    <div class="cta-overlay"></div>
+
+    <div class="cta-container">
+        <h2 class="cta-title">Construção de <span class="animated-gradient-text">Grande Valor</span></h2>
+        
+        <p class="cta-description">A Focus Infraestrutura realiza projetos nos mais diversos segmentos da indústria da construção.</p>
+        
+        <div class="cta-action-box">
+            <a href="https://wa.me/seu-numero" target="_blank" rel="noopener" class="btn-cta">Solicite Orçamento</a>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="footer-container">
+        
+        <div class="footer-column branding-col">
+            <div class="footer-logo">Focus <span>Infraestrutura</span></div>
+            <p class="footer-about">Soluções sólidas e inovadoras em engenharia e infraestrutura em todo o território nacional. Projetando e construindo o futuro de grandes negócios.</p>
+            
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h3>Navegação</h3>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#quem-somos">Quem Somos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#noticias">Notícias</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Canais de Contato</h3>
+            <ul class="footer-contact-info">
+                <li>
+                    <strong>Telefone:</strong>
+                    <a href="tel:63992245975">(63) 99224-5975</a>
+                </li>
+                <li>
+                    <strong>E-mail:</strong>
+                    <a href="mailto:contato@focusinfraestrutura.com.br">contato@focusinfraestrutura.com.br</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Onde Estamos</h3>
+            <p class="footer-address">
+                Rua das Andirobas, Quadra 43, Casa 17<br>
+                Bairro Renascença<br>
+                São Luís - MA | CEP: 65075-040
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-bottom-container">
+            <p>&copy; 2026 Focus Infraestrutura. Todos os direitos reservados.</p>
+            <p class="developer-credit">Desenvolvido por <span>Edge TI</span></p>
+        </div>
+    </div>
+</footer>
+<script>
+    // --- Lógica das Abas de Texto ---
+    function switchTab(event, tabId) {
+        // Remove a classe ativa de todos os botões
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Remove a classe ativa de todos os conteúdos
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+        
+        // Adiciona a classe ativa no botão clicado e no respectivo conteúdo
+        event.currentTarget.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    // --- Lógica do Carrossel de Imagens ---
+    let currentSlide = 0;
+    const totalSlides = 3; // Quantidade de imagens que colocamos
+
+    function updateCarousel() {
+        const slider = document.getElementById('carouselSlider');
+        const dots = document.querySelectorAll('.dot');
+        
+        // Move o slider horizontalmente baseado no slide atual
+        slider.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+        
+        // Atualiza os pontinhos indicadores
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function moveCarousel(direction) {
+        currentSlide += direction;
+        
+        // Faz o carrossel ser infinito (volta pro começo ou vai pro fim)
+        if (currentSlide >= totalSlides) {
+            currentSlide = 0;
+        } else if (currentSlide < 0) {
+            currentSlide = totalSlides - 1;
+        }
+        
+        updateCarousel();
+    }
+
+    function setCarouselSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+    // --- Lógica de Carrossel Infinito (Sem espaços brancos) ---
+const track = document.getElementById('portfolioTrack');
+const prevBtn = document.getElementById('prevCardBtn');
+const nextBtn = document.getElementById('nextCardBtn');
+const originalCards = Array.from(track.children);
+
+// Só ativa o loop inteligente em telas maiores (Desktop/Tablet)
+if (window.innerWidth > 768) {
+    const cardWidth = 380; // Correspondente ao CSS
+    const gap = 30;
+    const step = cardWidth + gap;
+
+    // Clonar os itens necessários para frente e para trás para mascarar o fundo
+    originalCards.forEach(card => {
+        const cloneBefore = card.cloneNode(true);
+        const cloneAfter = card.cloneNode(true);
+        track.appendChild(cloneAfter);
+        track.insertBefore(cloneBefore, track.firstChild);
+    });
+
+    // Posição inicial: deslocado exatamente o tamanho do bloco original clonado para a esquerda
+    let currentIndex = originalCards.length;
+    let isTransitioning = false;
+
+    // Alinhamento inicial instantâneo
+    track.style.transition = 'none';
+    track.style.transform = `translateX(-${currentIndex * step}px)`;
+
+    function moveCarousel(direction) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+        currentIndex += direction;
+        track.style.transform = `translateX(-${currentIndex * step}px)`;
+
+        // Checa se alcançou os clones das extremidades para resetar sem o usuário ver
+        track.addEventListener('transitionend', () => {
+            track.style.transition = 'none';
+            
+            if (currentIndex >= originalCards.length * 2) {
+                // Se foi muito para a direita, teleporta de volta para o miolo correspondente
+                currentIndex = originalCards.length;
+            } else if (currentIndex < originalCards.length) {
+                // Se foi muito para a esquerda, teleporta para o miolo correspondente
+                currentIndex = originalCards.length * 2 - 1;
+            }
+            
+            track.style.transform = `translateX(-${currentIndex * step}px)`;
+            isTransitioning = false;
+        }, { once: true });
+    }
+
+    nextBtn.addEventListener('click', () => moveCarousel(1));
+    prevBtn.addEventListener('click', () => moveCarousel(-1));
+}
+</script>
+</body>
+</html>
