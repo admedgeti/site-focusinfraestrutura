@@ -1,9 +1,10 @@
 ---
 title: "Pavimentação Asfáltica Industrial: Critérios para Alta Carga"
 date: 2026-06-11
-description: "Entenda os fatores determinantes no dimensionamento de pavimentos para pátios logísticos e tráfego pesado."
+description: "Entenda os fatores determinantes no dimensionamento de pavimentos para pátios logísticos."
 layout: layout-post.html
 tags: blog
+thumb: "/site-focusinfraestrutura/assets/images/post-blog-image/testeblogfocus.webp"
 ---
 
 A execução de pavimentação asfáltica em ambientes industriais difere drasticamente das vias urbanas convencionais. Pátios de manobra e centros de distribuição exigem um cálculo estrutural refinado para suportar cargas estáticas e dinâmicas contínuas sem sofrer deformações prematuras.

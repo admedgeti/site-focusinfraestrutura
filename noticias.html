@@ -8,109 +8,154 @@
     <link rel="stylesheet" href="/site-focusinfraestrutura/assets/css/footer.css">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        body {
-            background-color: #f8fafc;
-            color: #334155;
-            padding-top: 80px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    body {
+        background-color: #f8fafc;
+        color: #334155;
+        padding-top: 80px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
-        .news-banner {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(64, 0, 15, 0.9)), 
-                        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            color: #ffffff;
-            padding: 60px 20px;
-            text-align: center;
-        }
+    .news-banner {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(64, 0, 15, 0.9)), 
+                    url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        padding: 60px 20px;
+        text-align: center;
+    }
 
-        .news-banner h1 {
-            font-size: 42px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
+    .news-banner h1 {
+        font-size: 42px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+    }
 
-        .news-container {
-            flex: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            width: 100%;
-        }
+    .news-container {
+        flex: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        width: 100%;
+    }
 
-        /* Grid que organiza os cards */
+    /* 🔥 GRID RESPONSIVO: 3 colunas no Desktop, 2 no Tablet, 1 no Celular */
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+    
+    .news-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    /* Estilização do Card como um container unificado */
+    .news-card {
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden; /* Garante que a imagem siga as bordas arredondadas */
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+        border: 1px solid #e2e8f0;
+        height: 100%; /* Força todos os cards a terem a mesma altura na fileira */
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+    }
+
+    /* 🔥 Área da imagem personalizada */
+    .news-card-thumb {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        border-bottom: 1px solid #e2e8f0;
+        transition: transform 0.5s ease;
+    }
+
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(128, 0, 32, 0.1);
+        border-color: #800020;
+    }
+
+    /* Espaçamento interno dos textos do card */
+    .news-card-body {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .news-date {
+        font-size: 12px;
+        color: #800020;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+    }
+
+    .news-card h2 {
+        font-size: 20px;
+        color: #0f172a;
+        margin-bottom: 12px;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+
+    .news-card p {
+        font-size: 15px;
+        color: #64748b;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        /* Limita o resumo a no máximo 3 linhas para manter o design alinhado */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .read-more {
+        display: inline-flex;
+        align-items: center;
+        color: #800020;
+        font-weight: 700;
+        font-size: 14px;
+        gap: 5px;
+        margin-top: auto; /* Empurra o botão sempre para o rodapé do card */
+    }
+
+    /* 📱 Ajustes de Responsividade (Media Queries) */
+    @media (max-width: 1024px) {
         .news-grid {
-            display: block; /* WeasyPrint/Eleventy seguro */
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+            gap: 20px;
         }
-        
-        /* Layout de colunas usando tabela/bloco para compatibilidade */
-        .news-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            margin-bottom: 30px;
-        }
+    }
 
-        .news-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
+    @media (max-width: 640px) {
+        .news-grid {
+            grid-template-columns: 1fr; /* 1 única coluna em celulares */
         }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.1);
-            border-color: #800020;
+        .news-banner h1 {
+            font-size: 32px;
         }
-
-        .news-date {
-            font-size: 13px;
-            color: #800020;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .news-card h2 {
-            font-size: 22px;
-            color: #0f172a;
-            margin-bottom: 12px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        .news-card p {
-            font-size: 16px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 15px;
-            color: #800020;
-            font-weight: 700;
-            font-size: 14px;
-            gap: 5px;
-        }
-    </style>
+    }
+</style>
     <script src="/site-focusinfraestrutura/assets/js/header-component.js" defer></script>
 </head>
 <body>
@@ -124,23 +169,30 @@
 
    <main class="news-container">
         <div class="news-grid">
+    {% for post in collections.blog reversed %}
+    <a href="{{ post.url | url }}" class="news-card-link">
+        <article class="news-card">
             
-            <!-- 🔄 O LOOP MÁGICO DO ELEVENTY COMEÇA AQUI -->
-            {% for post in collections.blog reversed %}
-            <a href="{{ post.url | url }}" class="news-card-link">
-                <article class="news-card">
-                    <div class="news-date">{{ post.date | date: "%d/%m/%Y" }}</div>
-                    <h2>{{ post.data.title }}</h2>
-                    <p>{{ post.data.description }}</p>
-                    <span class="read-more">Ler artigo completo &rarr;</span>
-                </article>
-            </a>
+            {% if post.data.thumb %}
+                <div class="news-card-thumb" style="background-image: url('{{ post.data.thumb }}')"></div>
             {% else %}
-            <p style="text-align: center; color: #64748b; font-size: 18px;">Nenhum artigo publicado ainda.</p>
-            {% endfor %}
-            <!-- FINAL DO LOOP -->
-
-        </div>
+                <div class="news-card-thumb" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80')"></div>
+            {% endif %}
+            
+            <div class="news-card-body">
+                <div class="news-date">{{ post.date | date: "%d/%m/%Y" }}</div>
+                <h2>{{ post.data.title }}</h2>
+                <p>{{ post.data.description }}</p>
+                <span class="read-more">Ler artigo completo &rarr;</span>
+            </div>
+        </article>
+    </a>
+    {% else %}
+    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0;">
+        <p style="color: #64748b; font-size: 18px;">Nenhum artigo publicado ainda.</p>
+    </div>
+    {% endfor %}
+</div>
     </main>
 
     <footer class="footer">
