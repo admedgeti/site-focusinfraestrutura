@@ -947,7 +947,8 @@
     color: #ff4d6d; /* Vermelho mais aberto para contraste no fundo escuro */
     background: linear-gradient(90deg, #ff4d6d, #800020, #ff4d6d);
     background-size: 200% auto;
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; /* Obrigatório para Chrome/Safari/Edge/Blink */
+    background-clip: text;         /* Propriedade padrão para limpar o aviso do validador */
     -webkit-text-fill-color: transparent;
     animation: shineTextEffect 4s linear infinite;
     display: inline-block;
