@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/site-focusinfraestrutura/assets/css/footer.css">
     
     <style>
-        /* --- Configurações Globais da Página --- */
         * {
             margin: 0;
             padding: 0;
@@ -19,21 +18,23 @@
         body {
             background-color: #f8fafc;
             color: #334155;
-            padding-top: 80px; /* Evita que o header fixo cubra o topo */
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Banner Superior */
-        .blog-banner {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(64, 0, 15, 0.95)), 
+        .news-banner {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(64, 0, 15, 0.9)), 
                         url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: #ffffff;
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
-        .blog-banner h1 {
+        .news-banner h1 {
             font-size: 42px;
             font-weight: 800;
             text-transform: uppercase;
@@ -41,134 +42,73 @@
             margin-bottom: 12px;
         }
 
-        .blog-banner p {
-            font-size: 18px;
-            color: #cbd5e1;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-
-        /* Seção da Grade de Artigos */
-        .blog-section {
-            padding: 80px 20px;
+        .news-container {
+            flex: 1;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 60px 20px;
+            width: 100%;
         }
 
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 colunas no desktop */
-            gap: 35px;
+        /* Grid que organiza os cards */
+        .news-grid {
+            display: block; /* WeasyPrint/Eleventy seguro */
+        }
+        
+        /* Layout de colunas usando tabela/bloco para compatibilidade */
+        .news-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            margin-bottom: 30px;
         }
 
-        /* Card de Notícia Individual */
-        .blog-card {
-            background-color: #ffffff;
+        .news-card {
+            background: #ffffff;
             border-radius: 12px;
-            overflow: hidden;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        /* Caixa de Imagem do Card */
-        .blog-card-img {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            position: relative;
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.1);
+            border-color: #800020;
         }
 
-        .blog-card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        /* Conteúdo do Texto do Card */
-        .blog-card-content {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Meta dados (Data de publicação) */
-        .blog-card-meta {
+        .news-date {
             font-size: 13px;
-            color: #800020; /* Nosso Vermelho Escuro */
-            font-weight: 600;
-            margin-bottom: 10px;
+            color: #800020;
+            font-weight: 700;
             text-transform: uppercase;
+            margin-bottom: 10px;
             letter-spacing: 0.5px;
         }
 
-        .blog-card-content h2 {
-            font-size: 20px;
+        .news-card h2 {
+            font-size: 22px;
             color: #0f172a;
+            margin-bottom: 12px;
             font-weight: 700;
             line-height: 1.4;
-            margin-bottom: 12px;
         }
 
-        .blog-card-content p {
-            font-size: 15px;
+        .news-card p {
+            font-size: 16px;
             color: #64748b;
             line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1; /* Força o link a alinhar sempre na base */
         }
 
-        /* Link/Botão de ler mais */
-        .blog-card-link {
-            color: #800020; /* Vermelho Escuro */
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
+        .read-more {
             display: inline-flex;
             align-items: center;
+            margin-top: 15px;
+            color: #800020;
+            font-weight: 700;
+            font-size: 14px;
             gap: 5px;
-            transition: color 0.2s ease;
-            margin-top: auto;
-        }
-
-        /* Efeitos Hover */
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.06);
-            border-color: rgba(128, 0, 32, 0.15);
-        }
-
-        .blog-card:hover .blog-card-img img {
-            transform: scale(1.05);
-        }
-
-        .blog-card:hover .blog-card-link {
-            color: #ba183d;
-        }
-
-        /* --- Responsividade --- */
-        @media (max-width: 968px) {
-            .blog-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 colunas no tablet */
-                gap: 25px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .blog-grid {
-                grid-template-columns: 1fr; /* 1 coluna no celular */
-            }
-            .blog-banner h1 {
-                font-size: 32px;
-            }
-            .blog-section {
-                padding: 50px 15px;
-            }
         }
     </style>
     <script src="/site-focusinfraestrutura/assets/js/header-component.js" defer></script>
@@ -182,47 +122,26 @@
         <p>Acompanhe as últimas novidades, inovações e artigos técnicos da Focus Infraestrutura.</p>
     </section>
 
-    <section class="blog-section">
-        <div class="blog-grid">
+   <main class="news-container">
+        <div class="news-grid">
             
-            <article class="blog-card">
-                <div class="blog-card-img">
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" alt="Tecnologia em Obras">
-                </div>
-                <div class="blog-card-content">
-                    <div class="blog-card-meta">11 de Junho de 2026</div>
-                    <h2>Inovação na Pavimentação Asfáltica Industrial</h2>
-                    <p>Conheça as novas tecnologias que a Focus está aplicando para aumentar a durabilidade de vias expressas e pátios logísticos de alta carga.</p>
-                    <a href="#" class="blog-card-link">Leia o Artigo &rarr;</a>
-                </div>
-            </article>
-
-            <article class="blog-card">
-                <div class="blog-card-img">
-                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Planejamento de Projetos">
-                </div>
-                <div class="blog-card-content">
-                    <div class="blog-card-meta">05 de Junho de 2026</div>
-                    <h2>A Importância da Terraplanagem Investigativa</h2>
-                    <p>Como a análise computadorizada de solo antes da movimentação de terra reduz em até 15% os custos inesperados de fundação civil.</p>
-                    <a href="#" class="blog-card-link">Leia o Artigo &rarr;</a>
-                </div>
-            </article>
-
-            <article class="blog-card">
-                <div class="blog-card-img">
-                    <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=600&q=80" alt="Ecoeficiência na Construção">
-                </div>
-                <div class="blog-card-content">
-                    <div class="blog-card-meta">28 de Maio de 2026</div>
-                    <h2>Sustentabilidade e Ecoeficiência em Grandes Obras</h2>
-                    <p>Práticas modernas de reaproveitamento de agregados que a Focus adota para diminuir a pegada de carbono sem perder a rigidez estrutural.</p>
-                    <a href="#" class="blog-card-link">Leia o Artigo &rarr;</a>
-                </div>
-            </article>
+            <!-- 🔄 O LOOP MÁGICO DO ELEVENTY COMEÇA AQUI -->
+            {% for post in collections.blog reversed %}
+            <a href="{{ post.url | url }}" class="news-card-link">
+                <article class="news-card">
+                    <div class="news-date">{{ post.date | date: "%d/%m/%Y" }}</div>
+                    <h2>{{ post.data.title }}</h2>
+                    <p>{{ post.data.description }}</p>
+                    <span class="read-more">Ler artigo completo &rarr;</span>
+                </article>
+            </a>
+            {% else %}
+            <p style="text-align: center; color: #64748b; font-size: 18px;">Nenhum artigo publicado ainda.</p>
+            {% endfor %}
+            <!-- FINAL DO LOOP -->
 
         </div>
-    </section>
+    </main>
 
     <footer class="footer">
         <div class="footer-container">
