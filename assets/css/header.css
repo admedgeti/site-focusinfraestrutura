@@ -1,12 +1,20 @@
-/* --- Estilização do Header Atualizado --- */
+/* --- Estilização do Header --- */
+
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #2a0f0f;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    /* Alterado de #2a0f0f para RGBA com 85% de opacidade */
+    background-color: rgba(42, 15, 15, 0.85); 
+    
+    /* 🔥 O TRUQUE MODERNO: Cria um efeito de desfoque de vidro profissional no fundo */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Suporte para navegadores Safari/iOS */
+    
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra um pouco mais marcante para dar profundidade */
     z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
 .nav-container {
