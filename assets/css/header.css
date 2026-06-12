@@ -205,8 +205,8 @@
 .whatsapp-float-btn {
     position: fixed;
     bottom: 30px;
-    right: 30px; /* 🔥 Mudado estritamente para o lado direito */
-    background-color: #25d366; /* Verde oficial do WhatsApp */
+    right: 30px;
+    background-color: #25d366; /* Verde oficial */
     color: #ffffff !important;
     width: 60px;
     height: 60px;
@@ -215,19 +215,22 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
-    z-index: 9999; /* Fica por cima de absolutamente tudo */
-    transition: all 0.3s ease;
+    z-index: 9999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação suave estilo "pop" */
 }
 
-/* Centralização perfeita do ícone interno */
+/* 🔥 Ajuste Cirúrgico do Ícone: Garante tamanho proporcional e centralização total */
 .whatsapp-float-btn svg {
+    width: 38px;  /* Aumentado para preencher melhor o círculo */
+    height: 38px; /* Aumentado para preencher melhor o círculo */
     display: block;
+    transform: scale(1.1); /* Dá um leve ganho visual no desenho */
 }
 
 /* Efeitos de Interação (Hover e Escala) */
 .whatsapp-float-btn:hover {
     background-color: #20ba5a;
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(5deg); /* Dá uma leve inclinada charmosa ao passar o mouse */
     box-shadow: 0 6px 20px rgba(32, 186, 90, 0.4);
 }
 
@@ -235,12 +238,12 @@
 @media (max-width: 480px) {
     .whatsapp-float-btn {
         bottom: 20px;
-        right: 20px; /* Mantém na direita em telas menores */
-        width: 50px;
-        height: 50px;
+        right: 20px;
+        width: 54px;
+        height: 54px;
     }
     .whatsapp-float-btn svg {
-        width: 26px;
-        height: 26px;
+        width: 32px;
+        height: 32px;
     }
 }
