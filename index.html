@@ -17,147 +17,167 @@
             background-color: #f9f4f4;
             color: #333;
         }
-        /* --- Seção Hero / Destaque --- */
+        /* --- SEÇÃO HERO MODERNA & PREMIUM --- */
+/* --- SEÇÃO HERO MODERNA EM TELA CHEIA (100% VH) --- */
 .hero-section {
-    padding: 60px 20px;
-    background-color: #ffffff;
-    min-height: calc(100vh - 100px); /* Ocupa quase a tela toda */
+    position: relative;
+    width: 100%;
+    height: 100vh; /* 🔥 Força 100% da altura da tela visível no Desktop */
+    min-height: -webkit-fill-available; /* Correção para a barra de navegação do Safari no iPhone */
     display: flex;
     align-items: center;
+    background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantém o efeito Parallax */
+    overflow: hidden;
+    padding-top: 80px;
 }
 
+/* Máscara densa com o vermelho/marrom oficial da Focus */
+.hero-section .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 15, 15, 0.85); 
+    z-index: 1;
+}
+
+/* Container de Conteúdo */
 .hero-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
 }
 
-/* Estilização dos Textos */
-.hero-text {
-    flex: 1;
-    text-align: left;
+.hero-content {
+    max-width: 650px;
 }
 
-.hero-text .subtitle {
+/* Subtítulo */
+.hero-subtitle {
     display: inline-block;
-    color: #751010;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 12px;
+    color: #ff9a9a;
+    margin-bottom: 15px;
+    border-left: 3px solid #ff9a9a;
+    padding-left: 10px;
 }
 
-.hero-text h1 {
-    font-size: 48px;
+/* Título */
+.hero-content h1 {
+    font-size: 52px;
     font-weight: 800;
-    color: #0f172a;
-    line-height: 1.2;
+    line-height: 1.15;
+    color: #ffffff;
     margin-bottom: 20px;
+    letter-spacing: -0.5px;
 }
 
-.hero-text h1 .highlight {
-    color: #791010;
-    position: relative;
-}
-
-.hero-text p {
-    font-size: 18px;
-    color: #64748b;
+/* Descrição */
+.hero-content p {
+    font-size: 19px;
     line-height: 1.6;
-    margin-bottom: 30px;
+    color: #f1f5f9;
+    margin-bottom: 35px;
 }
 
-/* Botão Moderno */
-.btn-hero {
+/* Botão de Destaque Único */
+.btn-primary {
     display: inline-block;
-    padding: 15px 35px;
-    background-color: #006108;
+    padding: 16px 40px;
+    background-color: #ff4d6d;
     color: #ffffff;
     text-decoration: none;
-    font-weight: 600;
-    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 0 4px 18px rgba(255, 77, 109, 0.4);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 14px rgba(235, 37, 37, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.btn-hero:hover {
-    background-color: #00c92b;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 173, 173, 0.4);
+.btn-primary:hover {
+    background-color: #e03a58;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 77, 109, 0.5);
 }
 
-/* Container da Imagem (Direita) */
-.hero-image-container {
-    flex: 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.hero-image {
-    width: 100%;
-    max-width: 550px;
-    height: 450px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* Detalhe Moderno: Card flutuando sobre a imagem */
-.image-overlay-card {
+/* 🔥 INDICADOR DE ROLAGEM (Scroll Down) */
+.scroll-indicator {
     position: absolute;
-    bottom: -20px;
-    left: 20px;
-    background-color: #0f172a;
-    color: #ffffff;
-    padding: 20px 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    bottom: 25px; /* Alinhado ao rodapé da seção */
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-}
-
-.image-overlay-card strong {
-    font-size: 24px;
-    color: #48f838;
-}
-
-.image-overlay-card span {
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 12px;
-    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    z-index: 3;
+    transition: color 0.3s ease;
+    animation: bounceEffect 2s infinite; /* Loop contínuo de pulsação */
 }
 
-/* --- Ajustes de Responsividade para o Hero --- */
-@media (max-width: 968px) {
-    .hero-container {
-        flex-direction: column-reverse; /* Imagem fica no topo no mobile */
-        text-align: center;
-        gap: 40px;
-    }
+.scroll-indicator:hover {
+    color: #ff9a9a; /* Altera para a cor secundária ao passar o mouse */
+}
 
-    .hero-text {
-        text-align: center;
-    }
+.scroll-indicator svg {
+    display: block;
+}
 
-    .hero-text h1 {
-        font-size: 36px;
+/* 🔥 ANIMAÇÃO DA SETA (Efeito flutuante de vai e vem suave) */
+@keyframes bounceEffect {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
     }
+    40% {
+        transform: translate(-50%, -10px);
+    }
+    60% {
+        transform: translate(-50%, -5px);
+    }
+}
 
-    .hero-image {
-        height: 350px;
+/* --- Responsividade para Celulares (Mobile) --- */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 100vh; /* Garante 100% também em celulares */
+        background-attachment: scroll; /* Melhora a performance mobile tirando o parallax */
     }
     
-    .image-overlay-card {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -15px;
-        width: 80%;
+    .hero-content h1 {
+        font-size: 34px;
+    }
+    
+    .hero-content p {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+    
+    .btn-primary {
+        text-align: center;
+        width: 100%;
+    }
+
+    .scroll-indicator span {
+        display: none; /* No celular, oculta o texto longo e deixa apenas a setinha pulsando */
     }
 }
        /* --- Seção de Funcionalidades (Abas + Carrossel) --- */
@@ -1050,23 +1070,27 @@
     
     <main class="main-content">
     <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero-text">
-                <span class="subtitle">Engenharia e Inovação</span>
-                <h1>Projetando os seus <span class="highlight">sonhos</span></h1>
-                <p>Na Focus Infraestrutura, transformamos grandes ideias em realidade. Combinamos tecnologia de ponta, planejamento estratégico e execução impecável para construir o futuro da sua empresa.</p>
-                <a href="#contato" class="btn-hero">Fale Conosco</a>
-            </div>
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-container">
+        <div class="hero-content">
+            <span class="hero-subtitle">Engenharia e Infraestrutura</span>
+            <h1>Soluções Robustas em Terraplanagem e Pavimentação</h1>
+            <p>Construindo bases sólidas e transformando terrenos com máxima eficiência técnica, frota própria e conformidade rigorosa no Sul do Brasil.</p>
             
-            <div class="hero-image-container">
-                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" alt="Obra de Infraestrutura e Planejamento" class="hero-image">
-                <div class="image-overlay-card">
-                    <strong>+150</strong>
-                    <span>Projetos Entregues</span>
-                </div>
+            <div class="hero-buttons">
+                <a href="#contato" class="btn-primary">Fale Conosco</a>
             </div>
         </div>
-    </section>
+    </div>
+
+    <a href="#quem-somos" class="scroll-indicator" aria-label="Rolar para baixo">
+        <span>Role para ver mais</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M128,184a8,8,0,0,1-5.66-2.34l-80-80a8,8,0,0,1,11.32-11.32L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32l-80,80A8,8,0,0,1,128,184Z"></path>
+        </svg>
+    </a>
+</section>
 </main>
     <section class="features-section">
     <div class="features-container">
