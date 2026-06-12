@@ -1,6 +1,5 @@
 class CustomHeader extends HTMLElement {
     connectedCallback() {
-        // Define o prefixo de caminho do repositório da organização no GitHub Pages
         const base = "/site-focusinfraestrutura";
 
         this.innerHTML = `
@@ -46,12 +45,19 @@ class CustomHeader extends HTMLElement {
                 </div>
             </nav>
         </header>
+
+        <a href="https://wa.me/5563992245975?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20com%20a%20Focus%20Infraestrutura." 
+           class="whatsapp-float-btn" 
+           target="_blank" 
+           rel="noopener" 
+           aria-label="Fale conosco pelo WhatsApp">
+            <i class="ph ph-whatsapp-logo"></i>
+        </a>
         `;
 
-        // Executa a lógica de fechar o menu mobile ao clicar em um link de âncora (#)
+        // Lógica do menu mobile
         const menuToggle = this.querySelector('#menu-toggle');
         const links = this.querySelectorAll('.menu a');
-        
         links.forEach(link => {
             link.addEventListener('click', () => {
                 if (menuToggle && menuToggle.checked) {
@@ -62,5 +68,4 @@ class CustomHeader extends HTMLElement {
     }
 }
 
-// Registra a tag customizada no navegador
 customElements.define('custom-header', CustomHeader);
