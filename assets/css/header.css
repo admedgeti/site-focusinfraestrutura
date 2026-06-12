@@ -81,7 +81,29 @@
 .mobile-socials-item {
     display: none;
 }
+/* Estilização da linha de redes sociais dentro do menu mobile */
+.mobile-socials {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Espaço elegante entre os ícones */
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Divisor sutil no menu */
+}
 
+.mobile-socials a {
+    color: #cbd5e1; /* Cor cinza claro inicial */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Quando o usuário tocar ou passar o mouse no ícone dentro do menu mobile */
+.mobile-socials a:hover {
+    color: #ff4d6d; /* Destaque com o vermelho aceso da Focus */
+    transform: scale(1.1);
+}
 /* 3. Direita: Redes Sociais no Desktop */
 .header-socials {
     display: flex;
